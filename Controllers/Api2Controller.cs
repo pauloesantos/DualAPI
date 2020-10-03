@@ -14,6 +14,8 @@ namespace DualAPI.Controllers
         public string GetCalculaJuros([FromQuery] ParamQueryCalculaJuros valores)
         {
             double juros = 0.0;
+
+            //HttpClientHandler para simular um certificado ssl local
             using (var httpClientHandler = new HttpClientHandler())
             {
                 httpClientHandler.ServerCertificateCustomValidationCallback = (message, cert, chain, errors) => { return true; };
