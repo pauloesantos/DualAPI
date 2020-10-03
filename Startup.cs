@@ -40,7 +40,7 @@ namespace DualAPI
                         Description = "API REST criada com o ASP.NET Core 3.1 para Resolução do Teste da Squadra",
                         Contact = new OpenApiContact
                         {
-                            Name = "Paulo Eduardo Fagundes",
+                            Name = "Paulo Eduardo Fagundes dos Santoa",
                             Url = new Uri("https://github.com/pauloesantos")
                         }
                     });
