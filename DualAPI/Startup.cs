@@ -3,13 +3,17 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Reflection;
+using System.Text.Json;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Builder;
+using Microsoft.AspNetCore.Diagnostics.HealthChecks;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Diagnostics.HealthChecks;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using Microsoft.OpenApi.Models;
@@ -29,6 +33,9 @@ namespace DualAPI
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllers();
+
+            services.AddHealthChecks();
+
             services.AddSwaggerGen(c =>
             {
 
@@ -40,7 +47,7 @@ namespace DualAPI
                         Description = "API REST criada com o ASP.NET Core 3.1 para Resolução do Teste da Squadra",
                         Contact = new OpenApiContact
                         {
-                            Name = "Paulo Eduardo Fagundes dos Santoa",
+                            Name = "Paulo Eduardo Fagundes dos Santos",
                             Url = new Uri("https://github.com/pauloesantos")
                         }
                     });
@@ -58,12 +65,10 @@ namespace DualAPI
             {
                 app.UseDeveloperExceptionPage();
             }
-            // Enable middleware to serve generated Swagger as a JSON endpoint.
             app.UseSwagger(c =>
             {
                 c.SerializeAsV2 = true;
             });
-            // Enable middleware to serve generated Swagger as a JSON endpoint.
             app.UseSwaggerUI(c =>
             {
                 c.SwaggerEndpoint("/swagger/v1/swagger.json",
@@ -77,10 +82,18 @@ namespace DualAPI
 
             app.UseAuthorization();
 
+            app.UseHealthChecks("/health", new HealthCheckOptions { ResponseWriter = JsonResponseWriter });
+
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllers();
             });
+        }
+        private async Task JsonResponseWriter(HttpContext context, HealthReport report)
+        {
+            context.Response.ContentType = "application/json";
+            await JsonSerializer.SerializeAsync(context.Response.Body, new { Status = report.Status.ToString() },
+                new JsonSerializerOptions { PropertyNamingPolicy = JsonNamingPolicy.CamelCase });
         }
     }
 }
