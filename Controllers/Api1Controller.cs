@@ -2,7 +2,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace DualAPI.Controllers
 {
-    [Route("api1")]
+    [Route("")]
     public class Api1Controller : ControllerBase
     {
         [Route("taxaJuros")]

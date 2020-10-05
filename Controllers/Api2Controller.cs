@@ -6,14 +6,14 @@ using System;
 
 namespace DualAPI.Controllers
 {
-    [Route("api2")]
+    [Route("")]
     public class Api2Controller : ControllerBase
     {
         [Route("calculajuros")]
         [HttpGet]
         public string GetCalculaJuros([FromQuery] ParamQueryCalculaJuros valores)
         {
-            double juros = 0.0;
+            decimal juros = 0.0m;
 
             //HttpClientHandler para simular um certificado ssl local
             using (var httpClientHandler = new HttpClientHandler())
@@ -21,18 +21,18 @@ namespace DualAPI.Controllers
                 httpClientHandler.ServerCertificateCustomValidationCallback = (message, cert, chain, errors) => { return true; };
                 using (var httpClient = new HttpClient(httpClientHandler))
                 {
-                    using (var response = httpClient.GetAsync("https://localhost:5001/api1/taxaJuros").Result)
+                    using (var response = httpClient.GetAsync("https://localhost:5001/taxaJuros").Result)
                     {
                         response.EnsureSuccessStatusCode();
                         string apiResponse = response.Content.ReadAsStringAsync().Result;
-                        juros = JsonConvert.DeserializeObject<double>(apiResponse);
+                        juros = JsonConvert.DeserializeObject<Decimal>(apiResponse);
                     }
 
                 }
             }
+            var valorFinal = Convert.ToDecimal(Math.Pow(Convert.ToDouble(valores.ValorInicial * (1 + juros)), valores.Meses));
 
-            var valorFinal = Math.Pow((valores.ValorInicial * (1 + juros)), valores.Meses);
-            return valorFinal.ToString();
+            return valorFinal.ToString("n2");
         }
         [Route("showmethecode")]
         [HttpGet]
