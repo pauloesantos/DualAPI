@@ -2,37 +2,33 @@
  ## Projeto onde é criado 2 API's .Net Core, onde uma consumida pela outra
 
  ### A demanda
-Você deverá criar duas API's uma com dois endpoints e outra com um endpoint:
+ Você deverá criar duas API's uma com dois endpoints e outra com um endpoint:
 
+### API 1
+1) Retorna taxa de juros
 
-    ### API 1
+Responde pelo path relativo "/taxaJuros" Retorna o juros de 1% ou 0,01 (fixo no código) Exemplo: /taxaJuros Resultado esperado: 0,01
+### API 2
 
-        1) Retorna taxa de juros
+#### Calcula Juros
 
-        Responde pelo path relativo "/taxaJuros" Retorna o juros de 1% ou 0,01 (fixo no código) Exemplo: /taxaJuros Resultado esperado: 0,01
-    ### API 2
+Responde pelo path relativo "/calculajuros"
 
-    #### Calcula Juros
+Ela faz um cálculo em memória, de juros compostos, conforme abaixo: Valor Final = Valor Inicial * (1 + juros) ^ Tempo
 
-        Responde pelo path relativo "/calculajuros"
+Valor inicial é um decimal recebido como parâmetro. Valor do Juros deve ser consultado na API 1.
+Tempo é um inteiro, que representa meses, também recebido como parâmetro.
 
-        Ela faz um cálculo em memória, de juros compostos, conforme abaixo: Valor Final = Valor Inicial * (1 + juros) ^ Tempo
+^ representa a operação de potência.
 
-        Valor inicial é um decimal recebido como parâmetro. Valor do Juros deve ser consultado na API 1.
-        Tempo é um inteiro, que representa meses, também recebido como parâmetro.
+Resultado final deve ser truncado (sem arredondamento) em duas casas decimais.
 
-        ^ representa a operação de potência.
+Exemplo: /calculajuros?valorinicial=100&meses=5 Resultado esperado: 105,10
 
-        Resultado final deve ser truncado (sem arredondamento) em duas casas decimais.
+### Show me the code
 
-        Exemplo: /calculajuros?valorinicial=100&meses=5 Resultado esperado: 105,10
+Este responde pelo path relativo /showmethecode Deverá retornar a url de onde encontra-se o fonte no github
 
-    #### Show me the code
+### 🚀 Let's code! 🚀
 
-        Este responde pelo path relativo /showmethecode Deverá retornar a url de onde encontra-se o fonte no github
-
-
-
- ## 🚀 Let's code! 🚀
-
-  ## Projeto de Recrutamento da Squadra
+### Projeto de Recrutamento da Squadra
