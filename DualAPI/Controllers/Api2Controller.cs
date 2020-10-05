@@ -6,9 +6,19 @@ using System;
 
 namespace DualAPI.Controllers
 {
+    ///<summary>
+    ///API 2
+    ///</summary>
     [Route("")]
     public class Api2Controller : ControllerBase
     {
+        ///<summary>
+        ///Calcula Juros
+        ///</summary>
+        ///<param name="ValorInicial"></param>
+        ///<param name="Meses"></param>
+        ///<returns>Valor Juros composto</returns>
+
         [Route("calculajuros")]
         [HttpGet]
         public string GetCalculaJuros([FromQuery] ParamQueryCalculaJuros valores)
@@ -34,11 +44,15 @@ namespace DualAPI.Controllers
 
             return valorFinal.ToString("n2");
         }
+        ///<summary>
+        ///Show me the Code
+        ///</summary>
+        ///<returns>Link da onde está o código fonte</returns>
         [Route("showmethecode")]
         [HttpGet]
         public string GetShowMeTheCode()
         {
-            return "https://github.com/pauloesantos";
+            return "https://github.com/pauloesantos/DualAPI";
         }
     }
 }
