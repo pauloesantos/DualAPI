@@ -5,14 +5,14 @@
 Você deverá criar duas API's uma com dois endpoints e outra com um endpoint:
 
 
-    ###API 1
+    ### API 1
 
         1) Retorna taxa de juros
 
         Responde pelo path relativo "/taxaJuros" Retorna o juros de 1% ou 0,01 (fixo no código) Exemplo: /taxaJuros Resultado esperado: 0,01
-    ###API 2
+    ### API 2
 
-    ####Calcula Juros
+    #### Calcula Juros
 
         Responde pelo path relativo "/calculajuros"
 
@@ -27,7 +27,7 @@ Você deverá criar duas API's uma com dois endpoints e outra com um endpoint:
 
         Exemplo: /calculajuros?valorinicial=100&meses=5 Resultado esperado: 105,10
 
-    ####Show me the code
+    #### Show me the code
 
         Este responde pelo path relativo /showmethecode Deverá retornar a url de onde encontra-se o fonte no github
 
